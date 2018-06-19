@@ -1,0 +1,61 @@
+<h1>Device Information</h1>
+
+<table>
+    <tr>
+        <td>Asset Tag: </td>
+        <td>{{device.asset_tag}}</td>
+    </tr>
+    <tr>
+        <td>MAC Address: </td>
+        <td>{{device.mac_address}}</td>
+    </tr>
+    <tr>
+        <td>IP Address: </td>
+        <td>{{device.ip_address}}</td>
+    </tr>
+</table>
+
+<h2>Location Information</h2>
+
+<table>
+    <tr>
+        <td>Building Name: </td>
+        <td>{{ device.building_name }}</td>
+    </tr>
+    <tr>
+        <td>Building Address: </td>
+        <td>{{ device.building_address }}</td>
+    </tr>
+    <tr>
+        <td>Building Floor: </td>
+        <td>{{ device.building_floor }}</td>
+    </tr>
+    <tr>
+        <td>Access Point: </td>
+        <td>{{ device.access_point }}</td>
+    </tr>
+    <tr>
+        <td>Signal Strength: </td>
+        <td>{{ device.signal_strength }}</td>
+    </tr>
+</table>
+
+<h3>User Information</h3>
+
+<table>
+    <tr>
+        <td>Assigned to: </td>
+        <td>{{ device.assigned_user }}</td>
+    </tr>
+    <tr>
+        <td>Last User Login: </td>
+        <td>{{ device.last_login_user }}</td>
+    </tr>
+    <tr>
+        <td>Last Login Date: </td>
+        <td>{{ device.last_login_date }}</td>
+    </tr>
+</table>
+
+
+
