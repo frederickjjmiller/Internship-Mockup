@@ -13,6 +13,10 @@
         <td>IP Address: </td>
         <td>{{device.ip_address}}</td>
     </tr>
+    <tr>
+        <td>Vendor: </td>
+        <td>{{device.vendor}}</td>
+    </tr>
 </table>
 
 <h2>Location Information</h2>
@@ -30,6 +34,11 @@
         <td>Building Floor: </td>
         <td>{{ device.building_floor }}</td>
     </tr>
+</table>
+
+<h3>Connection Details</h3>
+
+<table>
     <tr>
         <td>Access Point: </td>
         <td>{{ device.access_point }}</td>
@@ -37,6 +46,14 @@
     <tr>
         <td>Signal Strength: </td>
         <td>{{ device.signal_strength }}</td>
+    </tr>
+    <tr>
+        <td>Connection Time: </td>
+        <td>{{ device.connection_time }}</td>
+    </tr>
+    <tr>
+        <td>Last 5 Access Points: </td>
+        <td>{{ device.last_five_access_points }}</td>
     </tr>
 </table>
 
