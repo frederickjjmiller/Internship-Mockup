@@ -11,6 +11,7 @@ class Device(models.Model):
     mac_address = models.CharField(max_length=17, default='Unknown')
     ip_address = models.CharField(max_length=45, default='127.0.0.1')
     vendor = models.CharField(max_length=100, default='Unknown')
+    is_wireless = models.BooleanField(default=True)
 
     # Device Location Fields
     building_address = models.CharField(max_length=100, default='None')
@@ -32,3 +33,22 @@ class Device(models.Model):
 
     def __str__(self):
         return self.asset_tag
+
+
+# This is code for the future implementation of API Calls
+
+
+class AccessPoint(models.Model):
+    device = models.ForeignKey(Device, on_delete=models.CASCADE)
+    ap_address = models.CharField(max_length=100, default='Unknown')
+    ap_id = models.CharField(max_length=100, default='Unknown')
+    connection_time = models.DurationField()
+    disconnection_time = models.DateTimeField(auto_now=False, auto_now_add=False,)
+    rssi = models.IntegerField(default=0)
+
+
+class Switch(models.Model):
+    device = models.ForeignKey(Device, on_delete=models.CASCADE)
+    switch_address = models.CharField(max_length=100, default='Unknown')
+    switch_id = models.CharField(max_length=100, default='Unknown')
+    connection_time = models.DurationField()

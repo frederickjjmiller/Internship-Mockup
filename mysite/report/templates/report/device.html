@@ -1,5 +1,15 @@
+<h1> Search by Asset Tag</h1>
+
 <form action="/report/" method="post">
     {% csrf_token %}
-    {{ form }}
-    <input type="submit" value="Submit" />
+    {{ device_form }}
+    <input type="submit" value="Search by Asset" />
+</form>
+
+<h1> Search by IP Address</h1>
+
+<form action="/report/" method="post">
+    {% csrf_token %}
+    {{ ip_form }}
+    <input type="submit" value="Search by IP " />
 </form>
