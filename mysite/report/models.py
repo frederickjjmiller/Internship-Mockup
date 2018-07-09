@@ -37,7 +37,7 @@ class Device(models.Model):
 
 # This is code for the future implementation of API Calls
 
-
+"""
 class AccessPoint(models.Model):
     device = models.ForeignKey(Device, on_delete=models.CASCADE)
     ap_address = models.CharField(max_length=100, default='Unknown')
@@ -51,4 +51,6 @@ class Switch(models.Model):
     device = models.ForeignKey(Device, on_delete=models.CASCADE)
     switch_address = models.CharField(max_length=100, default='Unknown')
     switch_id = models.CharField(max_length=100, default='Unknown')
-    connection_time = models.DurationField()
+connection_time = models.DurationField()
+
+"""

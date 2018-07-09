@@ -44,7 +44,7 @@ def device_report(request, device):
     try:
         requested_device = Device.objects.get(asset_tag=device)
         if requested_device.is_wireless:
-            template = loader.get_template('report/report.html')
+            template = loader.get_template('report/wireless_report.html')
             context = {'device': requested_device}
             return HttpResponse(template.render(context, request))
         else:
@@ -60,7 +60,7 @@ def ip_report(request, address):
     # request the device from the database
     try:
         requested_device = Device.objects.get(ip_address=address)
-        template = loader.get_template('report/report.html')
+        template = loader.get_template('report/wireless_report.html')
         context = {'device': requested_device}
         return HttpResponse(template.render(context, request))
     except ObjectDoesNotExist:
