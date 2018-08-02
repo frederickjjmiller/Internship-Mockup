@@ -9,6 +9,13 @@ import requests
 # Format the AP as 'XXXX-XXXX' Remove all numbers at the end so that the last character is non-numerical
 ########################################################################################################################
 
+#TEST
+
+# 48:45:20:93:C9:98
+# E4:A4:71:0D:B0:29
+# E4:A4:71:CC:A4:CF
+
+# Dictionary to match AP to building/floor
 name={'ININD-WIP-WM0A-AP1-':"Williamsport_Hospital_0",
       'BA1A-AP':"Ambulatory_BroadRipple",
       'ININD-BRG-BG1A-AP':"Ambulatory_Brownsburg",
@@ -232,6 +239,7 @@ name={'ININD-WIP-WM0A-AP1-':"Williamsport_Hospital_0",
 
 mac=input("Mac Address (quotes around the address): ")
 
+# API CALL TO AIRWAVE
 
 data='credential_0=stvuser&credential_1=K33pitEZ@&destination=/&login=Log In'
 headers={'Content-Type':'application/x-www-form-urlencoded','Cache-Control':'no-cache'}
@@ -246,7 +254,6 @@ output=outamp.content
 #Next line is for testing so API call does not need to be called
 #output=b'<?xml version="1.0" encoding="utf-8" standalone="yes"?>\n<amp:amp_client_detail version="1" xmlns:amp="http://www.airwave.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.airwave.com amp_client_detail.xsd">\n  <client mac="40:83:DE:CD:0A:23">\n    <ap id="3849">ININD-IND-CD2A-AP20</ap>\n    <assoc_stat>true</assoc_stat>\n    <association id="327884940">\n      <ap id="3851">ININD-IND-CD2A-AP21</ap>\n      <bytes_used>0</bytes_used>\n      <connect_time>2018-06-12T07:54:50-04:00</connect_time>\n      <disconnect_time>2018-06-12T07:55:46-04:00</disconnect_time>\n      <radio_mode>N</radio_mode>\n      <rssi>50</rssi>\n      <ssid>AH-VOICE</ssid>\n      <vlan>156</vlan>\n    </association>\n    <association id="327884040">\n      <ap id="3850">ININD-IND-CD2A-AP02</ap>\n      <bytes_used>0</bytes_used>\n      <connect_time>2018-06-12T07:54:40-04:00</connect_time>\n      <disconnect_time>2018-06-12T07:54:50-04:00</disconnect_time>\n      <radio_mode>N</radio_mode>\n      <ssid>AH-VOICE</ssid>\n      <vlan>156</vlan>\n    </association>\n    <association id="327883814">\n      <ap id="3839">ININD-IND-CD2A-AP03</ap>\n      <bytes_used>0</bytes_used>\n      <connect_time>2018-06-12T07:54:25-04:00</connect_time>\n      <disconnect_time>2018-06-12T07:54:40-04:00</disconnect_time>\n      <radio_mode>N</radio_mode>\n      <ssid>AH-VOICE</ssid>\n      <vlan>156</vlan>\n    </association>\n    <association id="327883667">\n      <ap id="3840">ININD-IND-CD2A-AP04</ap>\n      <bytes_used>0</bytes_used>\n      <connect_time>2018-06-12T07:53:44-04:00</connect_time>\n      <disconnect_time>2018-06-12T07:54:25-04:00</disconnect_time>\n      <radio_mode>N</radio_mode>\n      <rssi>52</rssi>\n      <ssid>AH-VOICE</ssid>\n      <vlan>156</vlan>\n    </association>\n    <association id="327882890">\n      <ap id="3853">ININD-IND-CD2A-AP17</ap>\n      <bytes_used>0</bytes_used>\n      <connect_time>2018-06-12T07:53:19-04:00</connect_time>\n      <disconnect_time>2018-06-12T07:53:44-04:00</disconnect_time>\n      <radio_mode>N</radio_mode>\n      <rssi>39</rssi>\n      <ssid>AH-VOICE</ssid>\n      <vlan>156</vlan>\n    </association>\n    <auth_stat>false</auth_stat>\n    <connect_time>2018-06-12T07:55:46-04:00</connect_time>\n    <device_type>Android</device_type>\n    <login_time>2017-12-04T10:35:17-05:00</login_time>\n    <logout_time>2017-12-04T10:39:46-05:00</logout_time>\n    <radio_mode>N</radio_mode>\n    <signal>-44</signal>\n    <ssid>AH-VOICE</ssid>\n    <vendor>Zebra Technologies Inc</vendor>\n    <vlan>156</vlan>\n  </client>\n</amp:amp_client_detail>\n'
 output=output.decode("utf-8")
-
 # THIS IS EASIER USING JSON or another way
 apid=""
 apid1=""
@@ -295,7 +302,7 @@ while (i<len(output)):
                 i+=2
                 if (output[i]=='i'):
                     i+=4
-                    while (output[i]!='"'):         #printing the AP ID as apid
+                    while (output[i]!='"'):         #printing the AP ID as apid, looks through the output from Airwave and parses for apid
                         if(j==0):
                             apid=apid+output[i]
                         if(j==1):
@@ -310,7 +317,7 @@ while (i<len(output)):
                             apid5 = apid5 + output[i]
                         i+=1
                     i+=2
-                    while (output[i]!='<'):         # setting the ININD THING as apadd
+                    while (output[i]!='<'):         # setting the ap address naming convention as apadd
                         if (j == 0):
                             apadd = apadd + output[i]
                         if (j == 1):
@@ -339,7 +346,7 @@ while (i<len(output)):
                            i+=1
                         if (output[i]=='>'):
                             i+=1
-                            while (output[i] != '<'):  # setting the ININD THING as apadd
+                            while (output[i] != '<'):  # Parses the data for the connect time and stores in ctime
                                 if (c == 0):
                                     ctime = ctime + output[i]
                                 if (c == 1):
@@ -369,7 +376,7 @@ while (i<len(output)):
                            i+=1
                         if (output[i]=='>'):
                             i+=1
-                        while (output[i] != '<'):  # setting the ININD THING as apadd
+                        while (output[i] != '<'):  # Parses the data for the disconnect time and stores in d time
                             if (d == 0):
                                 dtime = dtime + output[i]
                             if (d == 1):
@@ -385,7 +392,7 @@ while (i<len(output)):
                             i += 1
                         d += 1
                         i += 5
-    if (output[i]=='i' and output[i+1]=='p' and output[i+3]=='a' and output[i+4]=='d'):
+    if (output[i]=='i' and output[i+1]=='p' and output[i+3]=='a' and output[i+4]=='d'): # Parses the data for the IP address and stores in ip_add
         i+=9
         if (ip_add==""):
 
@@ -396,7 +403,7 @@ while (i<len(output)):
                 while (output[i]!='"'):
                     ip_add= ip_add + output[i]
                     i+=1
-    if (output[i]=='v' and output[i+1]=='e' and output[i+2]=='n' and output [i+3]=='d'):
+    if (output[i]=='v' and output[i+1]=='e' and output[i+2]=='n' and output [i+3]=='d'): # Parses the data for the vendor and stores is as vendor
         i+4
         while (output[i]!='>'):
             i+=1
@@ -419,7 +426,7 @@ while (i<len(output)):
                         i+1
                     if (output[i]=='>'):
                         i+=1
-                        while (output[i] != '<'):  # setting the ININD THING as apadd
+                        while (output[i] != '<'):  # Parses the data for the RSSI and stores in rssi
                             if (r == 0):
                                 rssi = rssi + output[i]
                             if (r == 1):
@@ -467,7 +474,7 @@ print (first['IP Address'])
 
 place=""
 inputs=apadd
-
+                        # Checks to see if the device is in airwave
 max=len(inputs)
 if max==0:
     print "Not in AirWave"
@@ -478,7 +485,7 @@ else:
     while inputs[max]=='0' or inputs[max]=='1' or inputs[max]=='2' or inputs[max]=='3' or inputs[max]=='4' or inputs[max]=='5' or inputs[max]=='6' or inputs[max]=='7' or inputs[max]=='8' or inputs[max]=='9':
         max-=1
 
-
+                        # Checks the dictionary and brings up the screenshot file.
     while i!=max+1:
         place=place+(inputs[i])
         i+=1
