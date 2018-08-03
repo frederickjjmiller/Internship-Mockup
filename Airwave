@@ -8,487 +8,485 @@ import requests
 # Add new AP to file easily by adding to the name dictionary.
 # Format the AP as 'XXXX-XXXX' Remove all numbers at the end so that the last character is non-numerical
 ########################################################################################################################
+      def AirWave(mac):
+      #TEST
 
-#TEST
+      # 48:45:20:93:C9:98
+      # E4:A4:71:0D:B0:29
+      # E4:A4:71:CC:A4:CF
 
-# 48:45:20:93:C9:98
-# E4:A4:71:0D:B0:29
-# E4:A4:71:CC:A4:CF
+      # Dictionary to match AP to building/floor
+      name={'ININD-WIP-WM0A-AP1-':"Williamsport_Hospital_0",
+            'BA1A-AP':"Ambulatory_BroadRipple",
+            'ININD-BRG-BG1A-AP':"Ambulatory_Brownsburg",
+            'ININD-CFV-CF1A-AP':"Ambulatory_Crawfordsville",
+            'GO1A-AP':"Greenwood_Ortho_Ambulatory",
+            'ININD-IND-LA1A-AP':"Lawrence_Ambulatory",
+            'PF1A-AP':"Plainfield_Ambulatory",
+            'ZW1A-AP':"Zionsville_Ambulatory",
+            'ININD-AND-MA1A-AP0-':"Anderson_MedicalArtsBuilding_0",
+            'ININD-AND-MA1A-AP1':"Anderson_MedicalArtsBuilding_1",
+            'ININD-AND-MA1A-AP2-':"Anderson_MedicalArtsBuilding_2",
+            'ININD-AND-BZ2A-AP1-':"Anderson_Roby_1",
+            'ININD-AND-BZ2A-AP':"Anderson_Roby_2",
+            'ININD-AND-BZ2A-AP3-':"Anderson_Roby_3",
+            'ININD-AND-AN0S-AP':"Anderson_St.VincentAnderson_0",
+            'ININD-AND-AN0B-AP':"Anderson_St.VincentAnderson_0",
+            'ININD-AND-AN0W-AP':"Anderson_St.VincentAnderson_0",
+            'ININD-AND-AN0N-AP':"Anderson_St.VincentAnderson_0",
+            'ININD-AND-AN1E-AP':"Anderson_St.VincentAnderson_1",
+            'ININD-AND-AN1B-AP1-':"Anderson_St.VincentAnderson_1",
+            'ININD-AND-AN1R-AP':"Anderson_St.VincentAnderson_1",
+            'ININD-AND-MA1A-AP':"Anderson_St.VincentAnderson_1",
+            'ININD-AND-AN2B-AP':"Anderson_St.VincentAnderson_2",
+            'ININD-AND-AN2A-AP':"Anderson_St.VincentAnderson_2",
+            'ININD-AND-AN1E-AP2-':"Anderson_St.VincentAnderson_2",
+            'ININD-AND-AN1R-AP2-':"Anderson_St.VincentAnderson_2",
+            'ININD-AND-AN4R-AP3-':"Anderson_St.VincentAnderson_3",
+            'ININD-AND-AN2A-AP3-':"Anderson_St.VincentAnderson_3",
+            'ININD-AND-AN4R-AP':"Anderson_St.VincentAnderson_4",
+            'ININD-AND-AN2A-AP4':"Anderson_St.VincentAnderson_4",
+            'ININD-AND-AN4R-AP5-':"Anderson_St.VincentAnderson_5",
+            'ININD-AND-AN2A-AP5-': "Anderson_St.VincentAnderson_5",
+            'ININD-AND-AN4R-AP6-': "Anderson_St.VincentAnderson_6",
+            'ININD-AND-AN1S-AP':"Anderson_Surgery",
+            'ININD-BED-LC1A-AP':"Bedford_Dunn_1",
+            'ININD-BED-LC2A-AP':"Bedford_Dunn_2",
+            'ININD-BED-LC3A-AP': "Bedford_Dunn_3",
+            'ININD-BED-LC4A-AP': "Bedford_Dunn_4",
+            'ININD-BED-LC5A-AP': "Bedford_Dunn_5",
+            'ININD-BED-LC5A-AP4-': "Bedford_Dunn_4",
+            'ININD-CAR-CA0A-AP': "Carmel_Hospital_0",
+            'ININD-CAR-CA0B-AP1-': "Carmel_Hospital_1",
+            'ININD-CAR-CA1C-AP': "Carmel_Hospital_1",
+            'ININD-CAR-CA2B-AP': "Carmel_Hospital_2",
+            'ININD-CAR-CA2C-AP': "Carmel_Hospital_2",
+            'ININD-CAR-CA2C-AP3-': "Carmel_Hospital_3",
+            'ININD-CAR-CA2B-AP3-': "Carmel_Hospital_3",
+            'ININD-CAR-6P2B-AP1-': "Carmel_POB_1",
+            'ININD-CAR-5P2B-AP1-': "Carmel_POB_1",
+            'ININD-CAR-7P1B-AP': "Carmel_POB_1",
+            'ININD-CAR-6P2B-AP': "Carmel_POB_2",
+            'ININD-CAR-5P2B-AP': "Carmel_POB_2",
+            'ININD-CAR-7B3B-AP2-': "Carmel_POB_2",
+            'ININD-CAR-6P2B-AP3-': "Carmel_POB_3",
+            'ININD-CAR-5P2B-AP3-': "Carmel_POB_3",
+            'ININD-CAR-7P3B-AP': "Carmel_POB_3",
+            'ININD-CAR-4P1A-AP': "Carmel_WomenHealthCare_1",
+            'ININD-CAR-4P2A-AP': "Carmel_WomenHealthCare_2",
+            'ININD-CAR-4P3A-AP': "Carmel_WomenHealthCare_3",
+            'ININD-CAR-SS1A-AP': "Clay_Terrace_Sport",
+            'ININD-IND-EZ1A-AP': "Parkdale_Place",
+            'ININD-IND-JS2A-AP': "Northside_Internal_Med",
+            'ININD-BRA-BH2A-AP0-': "Clay_Hospital_0",
+            'ININD-BRA-BH2A-AP1-': "Clay_Hospital_1",
+            'ININD-BRA-BH1A-AP': "Clay_Hospital_1",
+            'SM1A-AP0-':"Elwood_Mercy_0",
+            'SM1A-AP':"Elwood_Mercy_1",
+            'SM2A-AP': "Elwood_Mercy_2",
+            'SM3A-AP': "Elwood_Mercy_3",
+            'FH1A-AP':"Fishers_St.VincentFishers_1",
+            'FH1B-AP':"Fishers_St.VincentFishers_1",
+            'FH2A-AP':"Fishers_St.VincentFishers_2",
+            'FH2B-AP': "Fishers_St.VincentFishers_2",
+            'FH3A-AP':"Fishers_St.VincentFishers_3",
+            'FH3B-AP': "Fishers_St.VincentFishers_3",
+            'FH3A-AP4-': "Fishers_St.VincentFishers_4",
+            'FH3B-AP4-': "Fishers_St.VincentFishers_4",
+            'ININD-IND-1T2A-AP1-':"Heart_Center_MOB_1",
+            'ININD-IND-1T2A-AP':"Heart_Center_MOB_2",
+            'ININD-IND-1T2A-AP3-': "Heart_Center_MOB_3",
+            'ININD-IND-BT1A-AP' : "Heart_Center_Hospital_1",
+            'ININD-IND-BT2A-AP': "Heart_Center_Hospital_2",
+            'ININD-IND-BT3A-AP': "Heart_Center_Hospital_3",
+            'ININD-IND-BT4A-AP': "Heart_Center_Hospital_4",
+            'ININD-IND-NH1B-AP': "St.Vincent_Hospice",
+            'ININD-IND-SV0M-AP': "86th_0_SVOM",
+            'ININD-IND-SV0N-AP': "86th_0_SVON",
+            'ININD-IND-SV0B-AP': "86th_0_SVOB",
+            'ININD-IND-SV0P-AP': "86th_0_SVOP",
+            'ININD-IND-SV1P-AP': "86th_1_SV1P",
+            'ININD-IND-SV1L-AP': "86th_1_SV1L",
+            'ININD-IND-SV1M-AP': "86th_1_SV1M",
+            'ININD-IND-SV1R-AP': "86th_1_SV1R",
+            'ININD-IND-SV2M-AP': "86th_2_SV2M",
+            'ININD-IND-SV2T-AP': "86th_2_SV2T",
+            'ININD-IND-SV2S-AP': "86th_2_SV2S",
+            'ININD-IND-SV3H-AP': "St.Vincent_86th_3",
+            'ININD-IND-SV3E-AP': "St.Vincent_86th_3",
+            'ININD-IND-SV4H-AP': "St.Vincent_86th_4",
+            'ININD-IND-SV5S-AP': "St.Vincent_86th_5",
+            'ININD-IND-SV5T-AP': "St.Vincent_86th_5",
+            'ININD-IND-SV6T-AP': "St.Vincent_86th_6",
+            'ININD-IND-SV6S-AP': "St.Vincent_86th_6",
+            'ININD-IND-SV7B-AP': "St.Vincent_86th_7",
+            'ININD-IND-SV7C-AP': "St.Vincent_86th_7",
+            'ININD-IND-CR1A-AP': "8220_Naab_1",
+            'ININD-IND-CR2A-AP': "8220_Naab_2",
+            'ININD-IND-CR3A-AP': "8220_Naab_3",
+            'ININD-IND-CR4A-AP': "8220_Naab_4",
+            'ININD-IND-CR3B-AP': "8240_Naab_1",
+            'BC1A-AP': "Breast_Center_1",
+            'BC2A-AP': "Breast_Center_1",
+            'BC3A-AP': "Breast_Center_1",
+            'ININD-IND-CD0A-AP': "Cardio_0",
+            'ININD-IND-CD1A-AP': "Cardio_1",
+            'ININD-IND-CD1B-AP': "Cardio_1",
+            'ININD-IND-CD2A-AP': "Cardio_2",
+            'ININD-IND-CD3A-AP': "Cardio_3",
+            'ININD-IND-2P2A-AP': "Cardio_POB_2",
+            'ININD-IND-2P3A-AP': "Cardio_POB_3",
+            'ININD-IND-2P4A-AP': "Cardio_POB_4 ",
+            'ININD-IND-CH0A-AP': "Childrens_Hospital_0",
+            'ININD-IND-CH1A-AP': "Childrens_Hospital_1",
+            'ININD-IND-CH2A-AP': "Childrens_Hospital_2",
+            'ININD-IND-CH3A-AP': "Childrens_Hospital_3",
+            'ININD-IND-CH4A-AP': "Childrens_Hospital_4",
+            'ININD-IND-CV2A-AP1-':"Corvas_Building_1",
+            'ININD-IND-CV2A-AP': "Corvas_Building_2",
+            'ININD-IND-CV2A-AP3-': "Corvas_Building_3",
+            'ININD-IND-GL1A-AP':"Gleaners_Food_Bank",
+            'ININD-IND-HG1A-AP': "Heather_Glen_1",
+            'ININD-IND-1Q4A-AP3-': "Mission_Point",
+            'HC1A-AP': "Oncology",
+            'ININD-IND-SV0J-AP': "Ortho_0",
+            'ININD-IND-SV1Q-AP': "Ortho_1",
+            'ININD-IND-SV2O-AP': "Ortho_2",
+            'ININD-IND-BB5A-AP4-': "Pacers_Center_4",
+            'ININD-IND-BB5A-AP': "Pacers_Center_5",
+            'ININD-IND-FS1A-AP': "Parkwood_1",
+            'ININD-IND-FS2A-AP': "Parkwood_2",
+            'ININD-IND-FS3A-AP': "Parkwood_3",
+            'ININD-IND-FS4A-AP': "Parkwood_4",
+            'ININD-IND-FS5A-AP': "Parkwood_5",
+            'ININD-IND-1P1C-AP': "POB_1",
+            'ININD-IND-1P2C-AP': "POB_2",
+            'ININD-IND-1P3C-AP': "POB_3",
+            'ININD-IND-1P4C-AP': "POB_4",
+            'ININD-IND-1P5C-AP': "POB_5",
+            'ININD-IND-1P6C-AP': "POB_6",
+            'ININD-IND-1P7C-AP': "POB_7",
+            'ININD-IND-1P8C-AP': "POB_8",
+            'ININD-IND-SH1A-AP': "Seton_1",
+            'ININD-IND-SH2A-AP': "Seton_2",
+            'ININD-IND-SC2B-AP1-': "Stress_Center_1",
+            'ININD-IND-SC2B-AP': "Stress_Center_2",
+            'ININD-IND-RL1A-AP':"Ruth_Lily_1",
+            'ININD-IND-RL1A-AP2-': "Ruth_Lily_2",
+            'ININD-IND-SE1A-AP':"Simulation_Center_1",
+            'ININD-IND-SE2A-AP':"Simulation_Center_2",
+            'ININD-IND-1W1C-AP':"Womens_MOB_1",
+            'ININD-IND-1W1C-AP2-': "Womens_MOB_2",
+            'ININD-IND-TR1A-AP': "Womens_Hospital_1",
+            'ININD-IND-TR2A-AP': "Womens_Hospital_2",
+            'ININD-IND-TR3A-AP': "Womens_Hospital_3",
+            'ININD-NOV-JC1E-AP': "Jennings_Internal_Medicine_1",
+            'ININD-NOV-JC1A-AP': "Jennings_Hospital_1",
+            'ININD-NOV-JC1B-AP': "Jennings_Hospital_1",
+            'ININD-NOV-JC2A-AP': "Jennings_Hospital_2",
+            'ININD-NOV-JC2A-AP3-': "Jennings_Hospital_3",
+            'ININD-NOV-JC1C-AP':"Jennings_Outpatient_Speciality_Clinic",
+            'SJ0A-AP':"Kokomo_St.Vincent_0",
+            'SJ0C-AP': "Kokomo_St.Vincent_0",
+            '3K2A-AP1-': "Kokomo_St.Vincent_0",
+            '2K0A-AP': "Kokomo_St.Vincent_0",
+            '2K0A-AP1-': "Kokomo_St.Vincent_1",
+            'SJ1B-AP': "Kokomo_St.Vincent_1",
+            'SJ1C-AP': "Kokomo_St.Vincent_1",
+            '3K2A-AP': "Kokomo_St.Vincent_1",
+            'SJ1F-AP': "Kokomo_St.Vincent_1",
+            'SJ1E-AP': "Kokomo_St.Vincent_1",
+            '1K2A-AP1-': "Kokomo_St.Vincent_1",
+            'SJ1A-AP': "Kokomo_St.Vincent_1",
+            '1K2A-AP': "Kokomo_St.Vincent_2",
+            'SJ2A-AP': "Kokomo_St.Vincent_2",
+            '2K0A-AP2-': "Kokomo_St.Vincent_2",
+            '3KA-AP3-': "Kokomo_St.Vincent_2",
+            '1K3A-AP': "Kokomo_St.Vincent_3",
+            'SJ3B-AP': "Kokomo_St.Vincent_3",
+            '1J3A-AP': "Kokomo_St.Vincent_3",
+            '2K0A-AP3-': "Kokomo_St.Vincent_3",
+            'SJ4A-AP': "Kokomo_St.Vincent_4",
+            'AHMFM-IND-MF1A-AP': "MedxcellFM_73rd_1",
+            'ININD-AVO-AV1A-AP': "Avon_St.Vincent",
+            'ININD-IND-CT1A-AP': "Castelton_St.Vincent",
+            'ININD-IND-EM1A-AP': "Emerson_St.Vincent",
+            'ININD-NBV-NS1A-AP': "Nobelsville_St.Vincent",
+            'ININD-PLF-PL1A-AP': "Plainfield_St.Vincent",
+            'ININD-CAR-TB1B-AP': "NOB_1",
+            'ININD-CAR-TB1A-AP': "NOB_1",
+            'ININD-CAR-TB2A-AP': "NOB_2",
+            'ININD-CAR-TB2B-AP': "NOB_2",
+            'ININD-CAR-TB3B-AP': "NOB_3",
+            'ININD-CAR-TB3A-AP': "NOB_3",
+            'ININD-CAR-TB4A-AP': "NOB_4",
+            'ININD-CAR-TB4B-AP': "NOB_4",
+            'ININD-KOK-SB1A-AP': "188_Southway",
+            'DW1A-AP-': "317_Berkley",
+            'ININD-GRN-FGOA-AP1-':"712_Greentown",
+            'ININD-GRN-FG0A-AP1-':"712_Greentown",
+            'DX1A-AP-': "Dixon",
+            'ININD-MAR-AG1A-AP': "Marion",
+            'ININD-PEN-PD1A-AP': "Pendelton",
+            'ININD-WNC-RC1A-AP': "Randolph_Hospital",
+            'ININD-WNC-RC1B-AP': "Randolph_PAV",
+            'ININD-SAL-RJ0B-AP':"Salem_0",
+            'ININD-SAL-RJ0B-AP1-': "Salem_1",
+            'ININD-SAL-RJ0B-AP2-': "Salem_2",
+            'ININD-WIP-WM0A-AP': "Williamsport_Hospital_0",
+            'ININD-WIP-WM0A-AP1-': "Williamsport_Hospital_1"
+            }
 
-# Dictionary to match AP to building/floor
-name={'ININD-WIP-WM0A-AP1-':"Williamsport_Hospital_0",
-      'BA1A-AP':"Ambulatory_BroadRipple",
-      'ININD-BRG-BG1A-AP':"Ambulatory_Brownsburg",
-      'ININD-CFV-CF1A-AP':"Ambulatory_Crawfordsville",
-      'GO1A-AP':"Greenwood_Ortho_Ambulatory",
-      'ININD-IND-LA1A-AP':"Lawrence_Ambulatory",
-      'PF1A-AP':"Plainfield_Ambulatory",
-      'ZW1A-AP':"Zionsville_Ambulatory",
-      'ININD-AND-MA1A-AP0-':"Anderson_MedicalArtsBuilding_0",
-      'ININD-AND-MA1A-AP1':"Anderson_MedicalArtsBuilding_1",
-      'ININD-AND-MA1A-AP2-':"Anderson_MedicalArtsBuilding_2",
-      'ININD-AND-BZ2A-AP1-':"Anderson_Roby_1",
-      'ININD-AND-BZ2A-AP':"Anderson_Roby_2",
-      'ININD-AND-BZ2A-AP3-':"Anderson_Roby_3",
-      'ININD-AND-AN0S-AP':"Anderson_St.VincentAnderson_0",
-      'ININD-AND-AN0B-AP':"Anderson_St.VincentAnderson_0",
-      'ININD-AND-AN0W-AP':"Anderson_St.VincentAnderson_0",
-      'ININD-AND-AN0N-AP':"Anderson_St.VincentAnderson_0",
-      'ININD-AND-AN1E-AP':"Anderson_St.VincentAnderson_1",
-      'ININD-AND-AN1B-AP1-':"Anderson_St.VincentAnderson_1",
-      'ININD-AND-AN1R-AP':"Anderson_St.VincentAnderson_1",
-      'ININD-AND-MA1A-AP':"Anderson_St.VincentAnderson_1",
-      'ININD-AND-AN2B-AP':"Anderson_St.VincentAnderson_2",
-      'ININD-AND-AN2A-AP':"Anderson_St.VincentAnderson_2",
-      'ININD-AND-AN1E-AP2-':"Anderson_St.VincentAnderson_2",
-      'ININD-AND-AN1R-AP2-':"Anderson_St.VincentAnderson_2",
-      'ININD-AND-AN4R-AP3-':"Anderson_St.VincentAnderson_3",
-      'ININD-AND-AN2A-AP3-':"Anderson_St.VincentAnderson_3",
-      'ININD-AND-AN4R-AP':"Anderson_St.VincentAnderson_4",
-      'ININD-AND-AN2A-AP4':"Anderson_St.VincentAnderson_4",
-      'ININD-AND-AN4R-AP5-':"Anderson_St.VincentAnderson_5",
-      'ININD-AND-AN2A-AP5-': "Anderson_St.VincentAnderson_5",
-      'ININD-AND-AN4R-AP6-': "Anderson_St.VincentAnderson_6",
-      'ININD-AND-AN1S-AP':"Anderson_Surgery",
-      'ININD-BED-LC1A-AP':"Bedford_Dunn_1",
-      'ININD-BED-LC2A-AP':"Bedford_Dunn_2",
-      'ININD-BED-LC3A-AP': "Bedford_Dunn_3",
-      'ININD-BED-LC4A-AP': "Bedford_Dunn_4",
-      'ININD-BED-LC5A-AP': "Bedford_Dunn_5",
-      'ININD-BED-LC5A-AP4-': "Bedford_Dunn_4",
-      'ININD-CAR-CA0A-AP': "Carmel_Hospital_0",
-      'ININD-CAR-CA0B-AP1-': "Carmel_Hospital_1",
-      'ININD-CAR-CA1C-AP': "Carmel_Hospital_1",
-      'ININD-CAR-CA2B-AP': "Carmel_Hospital_2",
-      'ININD-CAR-CA2C-AP': "Carmel_Hospital_2",
-      'ININD-CAR-CA2C-AP3-': "Carmel_Hospital_3",
-      'ININD-CAR-CA2B-AP3-': "Carmel_Hospital_3",
-      'ININD-CAR-6P2B-AP1-': "Carmel_POB_1",
-      'ININD-CAR-5P2B-AP1-': "Carmel_POB_1",
-      'ININD-CAR-7P1B-AP': "Carmel_POB_1",
-      'ININD-CAR-6P2B-AP': "Carmel_POB_2",
-      'ININD-CAR-5P2B-AP': "Carmel_POB_2",
-      'ININD-CAR-7B3B-AP2-': "Carmel_POB_2",
-      'ININD-CAR-6P2B-AP3-': "Carmel_POB_3",
-      'ININD-CAR-5P2B-AP3-': "Carmel_POB_3",
-      'ININD-CAR-7P3B-AP': "Carmel_POB_3",
-      'ININD-CAR-4P1A-AP': "Carmel_WomenHealthCare_1",
-      'ININD-CAR-4P2A-AP': "Carmel_WomenHealthCare_2",
-      'ININD-CAR-4P3A-AP': "Carmel_WomenHealthCare_3",
-      'ININD-CAR-SS1A-AP': "Clay_Terrace_Sport",
-      'ININD-IND-EZ1A-AP': "Parkdale_Place",
-      'ININD-IND-JS2A-AP': "Northside_Internal_Med",
-      'ININD-BRA-BH2A-AP0-': "Clay_Hospital_0",
-      'ININD-BRA-BH2A-AP1-': "Clay_Hospital_1",
-      'ININD-BRA-BH1A-AP': "Clay_Hospital_1",
-      'SM1A-AP0-':"Elwood_Mercy_0",
-      'SM1A-AP':"Elwood_Mercy_1",
-      'SM2A-AP': "Elwood_Mercy_2",
-      'SM3A-AP': "Elwood_Mercy_3",
-      'FH1A-AP':"Fishers_St.VincentFishers_1",
-      'FH1B-AP':"Fishers_St.VincentFishers_1",
-      'FH2A-AP':"Fishers_St.VincentFishers_2",
-      'FH2B-AP': "Fishers_St.VincentFishers_2",
-      'FH3A-AP':"Fishers_St.VincentFishers_3",
-      'FH3B-AP': "Fishers_St.VincentFishers_3",
-      'FH3A-AP4-': "Fishers_St.VincentFishers_4",
-      'FH3B-AP4-': "Fishers_St.VincentFishers_4",
-      'ININD-IND-1T2A-AP1-':"Heart_Center_MOB_1",
-      'ININD-IND-1T2A-AP':"Heart_Center_MOB_2",
-      'ININD-IND-1T2A-AP3-': "Heart_Center_MOB_3",
-      'ININD-IND-BT1A-AP' : "Heart_Center_Hospital_1",
-      'ININD-IND-BT2A-AP': "Heart_Center_Hospital_2",
-      'ININD-IND-BT3A-AP': "Heart_Center_Hospital_3",
-      'ININD-IND-BT4A-AP': "Heart_Center_Hospital_4",
-      'ININD-IND-NH1B-AP': "St.Vincent_Hospice",
-      'ININD-IND-SV0M-AP': "86th_0_SVOM",
-      'ININD-IND-SV0N-AP': "86th_0_SVON",
-      'ININD-IND-SV0B-AP': "86th_0_SVOB",
-      'ININD-IND-SV0P-AP': "86th_0_SVOP",
-      'ININD-IND-SV1P-AP': "86th_1_SV1P",
-      'ININD-IND-SV1L-AP': "86th_1_SV1L",
-      'ININD-IND-SV1M-AP': "86th_1_SV1M",
-      'ININD-IND-SV1R-AP': "86th_1_SV1R",
-      'ININD-IND-SV2M-AP': "86th_2_SV2M",
-      'ININD-IND-SV2T-AP': "86th_2_SV2T",
-      'ININD-IND-SV2S-AP': "86th_2_SV2S",
-      'ININD-IND-SV3H-AP': "St.Vincent_86th_3",
-      'ININD-IND-SV3E-AP': "St.Vincent_86th_3",
-      'ININD-IND-SV4H-AP': "St.Vincent_86th_4",
-      'ININD-IND-SV5S-AP': "St.Vincent_86th_5",
-      'ININD-IND-SV5T-AP': "St.Vincent_86th_5",
-      'ININD-IND-SV6T-AP': "St.Vincent_86th_6",
-      'ININD-IND-SV6S-AP': "St.Vincent_86th_6",
-      'ININD-IND-SV7B-AP': "St.Vincent_86th_7",
-      'ININD-IND-SV7C-AP': "St.Vincent_86th_7",
-      'ININD-IND-CR1A-AP': "8220_Naab_1",
-      'ININD-IND-CR2A-AP': "8220_Naab_2",
-      'ININD-IND-CR3A-AP': "8220_Naab_3",
-      'ININD-IND-CR4A-AP': "8220_Naab_4",
-      'ININD-IND-CR3B-AP': "8240_Naab_1",
-      'BC1A-AP': "Breast_Center_1",
-      'BC2A-AP': "Breast_Center_1",
-      'BC3A-AP': "Breast_Center_1",
-      'ININD-IND-CD0A-AP': "Cardio_0",
-      'ININD-IND-CD1A-AP': "Cardio_1",
-      'ININD-IND-CD1B-AP': "Cardio_1",
-      'ININD-IND-CD2A-AP': "Cardio_2",
-      'ININD-IND-CD3A-AP': "Cardio_3",
-      'ININD-IND-2P2A-AP': "Cardio_POB_2",
-      'ININD-IND-2P3A-AP': "Cardio_POB_3",
-      'ININD-IND-2P4A-AP': "Cardio_POB_4 ",
-      'ININD-IND-CH0A-AP': "Childrens_Hospital_0",
-      'ININD-IND-CH1A-AP': "Childrens_Hospital_1",
-      'ININD-IND-CH2A-AP': "Childrens_Hospital_2",
-      'ININD-IND-CH3A-AP': "Childrens_Hospital_3",
-      'ININD-IND-CH4A-AP': "Childrens_Hospital_4",
-      'ININD-IND-CV2A-AP1-':"Corvas_Building_1",
-      'ININD-IND-CV2A-AP': "Corvas_Building_2",
-      'ININD-IND-CV2A-AP3-': "Corvas_Building_3",
-      'ININD-IND-GL1A-AP':"Gleaners_Food_Bank",
-      'ININD-IND-HG1A-AP': "Heather_Glen_1",
-      'ININD-IND-1Q4A-AP3-': "Mission_Point",
-      'HC1A-AP': "Oncology",
-      'ININD-IND-SV0J-AP': "Ortho_0",
-      'ININD-IND-SV1Q-AP': "Ortho_1",
-      'ININD-IND-SV2O-AP': "Ortho_2",
-      'ININD-IND-BB5A-AP4-': "Pacers_Center_4",
-      'ININD-IND-BB5A-AP': "Pacers_Center_5",
-      'ININD-IND-FS1A-AP': "Parkwood_1",
-      'ININD-IND-FS2A-AP': "Parkwood_2",
-      'ININD-IND-FS3A-AP': "Parkwood_3",
-      'ININD-IND-FS4A-AP': "Parkwood_4",
-      'ININD-IND-FS5A-AP': "Parkwood_5",
-      'ININD-IND-1P1C-AP': "POB_1",
-      'ININD-IND-1P2C-AP': "POB_2",
-      'ININD-IND-1P3C-AP': "POB_3",
-      'ININD-IND-1P4C-AP': "POB_4",
-      'ININD-IND-1P5C-AP': "POB_5",
-      'ININD-IND-1P6C-AP': "POB_6",
-      'ININD-IND-1P7C-AP': "POB_7",
-      'ININD-IND-1P8C-AP': "POB_8",
-      'ININD-IND-SH1A-AP': "Seton_1",
-      'ININD-IND-SH2A-AP': "Seton_2",
-      'ININD-IND-SC2B-AP1-': "Stress_Center_1",
-      'ININD-IND-SC2B-AP': "Stress_Center_2",
-      'ININD-IND-RL1A-AP':"Ruth_Lily_1",
-      'ININD-IND-RL1A-AP2-': "Ruth_Lily_2",
-      'ININD-IND-SE1A-AP':"Simulation_Center_1",
-      'ININD-IND-SE2A-AP':"Simulation_Center_2",
-      'ININD-IND-1W1C-AP':"Womens_MOB_1",
-      'ININD-IND-1W1C-AP2-': "Womens_MOB_2",
-      'ININD-IND-TR1A-AP': "Womens_Hospital_1",
-      'ININD-IND-TR2A-AP': "Womens_Hospital_2",
-      'ININD-IND-TR3A-AP': "Womens_Hospital_3",
-      'ININD-NOV-JC1E-AP': "Jennings_Internal_Medicine_1",
-      'ININD-NOV-JC1A-AP': "Jennings_Hospital_1",
-      'ININD-NOV-JC1B-AP': "Jennings_Hospital_1",
-      'ININD-NOV-JC2A-AP': "Jennings_Hospital_2",
-      'ININD-NOV-JC2A-AP3-': "Jennings_Hospital_3",
-      'ININD-NOV-JC1C-AP':"Jennings_Outpatient_Speciality_Clinic",
-      'SJ0A-AP':"Kokomo_St.Vincent_0",
-      'SJ0C-AP': "Kokomo_St.Vincent_0",
-      '3K2A-AP1-': "Kokomo_St.Vincent_0",
-      '2K0A-AP': "Kokomo_St.Vincent_0",
-      '2K0A-AP1-': "Kokomo_St.Vincent_1",
-      'SJ1B-AP': "Kokomo_St.Vincent_1",
-      'SJ1C-AP': "Kokomo_St.Vincent_1",
-      '3K2A-AP': "Kokomo_St.Vincent_1",
-      'SJ1F-AP': "Kokomo_St.Vincent_1",
-      'SJ1E-AP': "Kokomo_St.Vincent_1",
-      '1K2A-AP1-': "Kokomo_St.Vincent_1",
-      'SJ1A-AP': "Kokomo_St.Vincent_1",
-      '1K2A-AP': "Kokomo_St.Vincent_2",
-      'SJ2A-AP': "Kokomo_St.Vincent_2",
-      '2K0A-AP2-': "Kokomo_St.Vincent_2",
-      '3KA-AP3-': "Kokomo_St.Vincent_2",
-      '1K3A-AP': "Kokomo_St.Vincent_3",
-      'SJ3B-AP': "Kokomo_St.Vincent_3",
-      '1J3A-AP': "Kokomo_St.Vincent_3",
-      '2K0A-AP3-': "Kokomo_St.Vincent_3",
-      'SJ4A-AP': "Kokomo_St.Vincent_4",
-      'AHMFM-IND-MF1A-AP': "MedxcellFM_73rd_1",
-      'ININD-AVO-AV1A-AP': "Avon_St.Vincent",
-      'ININD-IND-CT1A-AP': "Castelton_St.Vincent",
-      'ININD-IND-EM1A-AP': "Emerson_St.Vincent",
-      'ININD-NBV-NS1A-AP': "Nobelsville_St.Vincent",
-      'ININD-PLF-PL1A-AP': "Plainfield_St.Vincent",
-      'ININD-CAR-TB1B-AP': "NOB_1",
-      'ININD-CAR-TB1A-AP': "NOB_1",
-      'ININD-CAR-TB2A-AP': "NOB_2",
-      'ININD-CAR-TB2B-AP': "NOB_2",
-      'ININD-CAR-TB3B-AP': "NOB_3",
-      'ININD-CAR-TB3A-AP': "NOB_3",
-      'ININD-CAR-TB4A-AP': "NOB_4",
-      'ININD-CAR-TB4B-AP': "NOB_4",
-      'ININD-KOK-SB1A-AP': "188_Southway",
-      'DW1A-AP-': "317_Berkley",
-      'ININD-GRN-FGOA-AP1-':"712_Greentown",
-      'ININD-GRN-FG0A-AP1-':"712_Greentown",
-      'DX1A-AP-': "Dixon",
-      'ININD-MAR-AG1A-AP': "Marion",
-      'ININD-PEN-PD1A-AP': "Pendelton",
-      'ININD-WNC-RC1A-AP': "Randolph_Hospital",
-      'ININD-WNC-RC1B-AP': "Randolph_PAV",
-      'ININD-SAL-RJ0B-AP':"Salem_0",
-      'ININD-SAL-RJ0B-AP1-': "Salem_1",
-      'ININD-SAL-RJ0B-AP2-': "Salem_2",
-      'ININD-WIP-WM0A-AP': "Williamsport_Hospital_0",
-      'ININD-WIP-WM0A-AP1-': "Williamsport_Hospital_1"
-      }
+      # API CALL TO AIRWAVE
 
-mac=input("Mac Address (quotes around the address): ")
+      data='credential_0=stvuser&credential_1=K33pitEZ@&destination=/&login=Log In'
+      headers={'Content-Type':'application/x-www-form-urlencoded','Cache-Control':'no-cache'}
+      ampsession = requests.Session()
+      loginamp = ampsession.post('https://10.170.11.209/LOGIN', headers=headers, data=data, verify=False)
+      #print (loginamp)
+      ampsession.cookies
+      outamp= ampsession.get('https://10.170.11.209/client_detail.xml?mac='+mac, headers=headers, verify=False)
+      #print (outamp)
+      output=outamp.content
+      # print (output)
+      #Next line is for testing so API call does not need to be called
+      #output=b'<?xml version="1.0" encoding="utf-8" standalone="yes"?>\n<amp:amp_client_detail version="1" xmlns:amp="http://www.airwave.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.airwave.com amp_client_detail.xsd">\n  <client mac="40:83:DE:CD:0A:23">\n    <ap id="3849">ININD-IND-CD2A-AP20</ap>\n    <assoc_stat>true</assoc_stat>\n    <association id="327884940">\n      <ap id="3851">ININD-IND-CD2A-AP21</ap>\n      <bytes_used>0</bytes_used>\n      <connect_time>2018-06-12T07:54:50-04:00</connect_time>\n      <disconnect_time>2018-06-12T07:55:46-04:00</disconnect_time>\n      <radio_mode>N</radio_mode>\n      <rssi>50</rssi>\n      <ssid>AH-VOICE</ssid>\n      <vlan>156</vlan>\n    </association>\n    <association id="327884040">\n      <ap id="3850">ININD-IND-CD2A-AP02</ap>\n      <bytes_used>0</bytes_used>\n      <connect_time>2018-06-12T07:54:40-04:00</connect_time>\n      <disconnect_time>2018-06-12T07:54:50-04:00</disconnect_time>\n      <radio_mode>N</radio_mode>\n      <ssid>AH-VOICE</ssid>\n      <vlan>156</vlan>\n    </association>\n    <association id="327883814">\n      <ap id="3839">ININD-IND-CD2A-AP03</ap>\n      <bytes_used>0</bytes_used>\n      <connect_time>2018-06-12T07:54:25-04:00</connect_time>\n      <disconnect_time>2018-06-12T07:54:40-04:00</disconnect_time>\n      <radio_mode>N</radio_mode>\n      <ssid>AH-VOICE</ssid>\n      <vlan>156</vlan>\n    </association>\n    <association id="327883667">\n      <ap id="3840">ININD-IND-CD2A-AP04</ap>\n      <bytes_used>0</bytes_used>\n      <connect_time>2018-06-12T07:53:44-04:00</connect_time>\n      <disconnect_time>2018-06-12T07:54:25-04:00</disconnect_time>\n      <radio_mode>N</radio_mode>\n      <rssi>52</rssi>\n      <ssid>AH-VOICE</ssid>\n      <vlan>156</vlan>\n    </association>\n    <association id="327882890">\n      <ap id="3853">ININD-IND-CD2A-AP17</ap>\n      <bytes_used>0</bytes_used>\n      <connect_time>2018-06-12T07:53:19-04:00</connect_time>\n      <disconnect_time>2018-06-12T07:53:44-04:00</disconnect_time>\n      <radio_mode>N</radio_mode>\n      <rssi>39</rssi>\n      <ssid>AH-VOICE</ssid>\n      <vlan>156</vlan>\n    </association>\n    <auth_stat>false</auth_stat>\n    <connect_time>2018-06-12T07:55:46-04:00</connect_time>\n    <device_type>Android</device_type>\n    <login_time>2017-12-04T10:35:17-05:00</login_time>\n    <logout_time>2017-12-04T10:39:46-05:00</logout_time>\n    <radio_mode>N</radio_mode>\n    <signal>-44</signal>\n    <ssid>AH-VOICE</ssid>\n    <vendor>Zebra Technologies Inc</vendor>\n    <vlan>156</vlan>\n  </client>\n</amp:amp_client_detail>\n'
+      output=output.decode("utf-8")
+      # THIS IS EASIER USING JSON or another way
+      apid=""
+      apid1=""
+      apid2=""
+      apid3=""
+      apid4=""
+      apid5=""
+      apadd=""
+      apadd1=""
+      apadd2=""
+      apadd3=""
+      apadd4=""
+      apadd5=""
+      ctime=""
+      ctime1=""
+      ctime2=""
+      ctime3=""
+      ctime4=""
+      ctime5=""
+      dtime=""
+      dtime1=""
+      dtime2=""
+      dtime3=""
+      dtime4=""
+      dtime5=""
+      rssi=""
+      rssi1=""
+      rssi2=""
+      rssi3=""
+      rssi4=""
+      rssi5=""
+      ip_add=""
+      vendor=""
 
-# API CALL TO AIRWAVE
+      r=0
+      d=0
+      c=0
+      j=0
+      i=0
+      while (i<len(output)):
+          if (output[i]=='<'):
+             i+=1
+             if (output[i]=='a'):
+                  i+=1
+                  if (output[i]=='p'):
+                      i+=2
+                      if (output[i]=='i'):
+                          i+=4
+                          while (output[i]!='"'):         #printing the AP ID as apid, looks through the output from Airwave and parses for apid
+                              if(j==0):
+                                  apid=apid+output[i]
+                              if(j==1):
+                                  apid1=apid1+output[i]
+                              if (j == 2):
+                                  apid2 = apid2 + output[i]
+                              if (j == 3):
+                                  apid3 = apid3 + output[i]
+                              if (j == 4):
+                                  apid4 = apid4 + output[i]
+                              if (j == 5):
+                                  apid5 = apid5 + output[i]
+                              i+=1
+                          i+=2
+                          while (output[i]!='<'):         # setting the ap address naming convention as apadd
+                              if (j == 0):
+                                  apadd = apadd + output[i]
+                              if (j == 1):
+                                  apadd1 = apadd1 + output[i]
+                              if (j == 2):
+                                  apadd2 = apadd2 + output[i]
+                              if (j == 3):
+                                  apadd3 = apadd3 + output[i]
+                              if (j == 4):
+                                  apadd4 = apadd4 + output[i]
+                              if (j == 5):
+                                  apadd5 = apadd5 + output[i]
+                              i+=1
+                          j+=1
+          if (output[i]=='c'):
+              i+=1
+              if (output[i]=='o'):
+                  i+=1
+                  if (output[i]=='n'):
+                      i+=1
+                      if (output[i]=='n'):
+                          i+=1
+                          if (output[i]=='e'):
+                              i+=1
+                              while (output[i]!= '>'):
+                                 i+=1
+                              if (output[i]=='>'):
+                                  i+=1
+                                  while (output[i] != '<'):  # Parses the data for the connect time and stores in ctime
+                                      if (c == 0):
+                                          ctime = ctime + output[i]
+                                      if (c == 1):
+                                          ctime1 = ctime1 + output[i]
+                                      if (c == 2):
+                                          ctime2 = ctime2 + output[i]
+                                      if (c == 3):
+                                          ctime3 = ctime3 + output[i]
+                                      if (c == 4):
+                                          ctime4 = ctime4 + output[i]
+                                      if (c == 5):
+                                          ctime5 = ctime5 + output[i]
+                                      i += 1
+                                  c += 1
+                                  i +=5
+          if (output[i]=='d'):
+              i+=1
+              if (output[i]=='i'):
+                  i+=1
+                  if (output[i]=='s'):
+                      i+=1
+                      if (output[i]=='c'):
+                          i+=1
+                          if (output[i]=='o'):
+                              i+=1
+                              while (output[i]!= '>'):
+                                 i+=1
+                              if (output[i]=='>'):
+                                  i+=1
+                              while (output[i] != '<'):  # Parses the data for the disconnect time and stores in d time
+                                  if (d == 0):
+                                      dtime = dtime + output[i]
+                                  if (d == 1):
+                                      dtime1 = dtime1 + output[i]
+                                  if (d == 2):
+                                      dtime2 = dtime2 + output[i]
+                                  if (d == 3):
+                                      dtime3 = dtime3 + output[i]
+                                  if (d == 4):
+                                      dtime4 = dtime4 + output[i]
+                                  if (d == 5):
+                                      dtime5 = dtime5 + output[i]
+                                  i += 1
+                              d += 1
+                              i += 5
+          if (output[i]=='i' and output[i+1]=='p' and output[i+3]=='a' and output[i+4]=='d'): # Parses the data for the IP address and stores in ip_add
+              i+=9
+              if (ip_add==""):
 
-data='credential_0=stvuser&credential_1=K33pitEZ@&destination=/&login=Log In'
-headers={'Content-Type':'application/x-www-form-urlencoded','Cache-Control':'no-cache'}
-ampsession = requests.Session()
-loginamp = ampsession.post('https://10.170.11.209/LOGIN', headers=headers, data=data, verify=False)
-#print (loginamp)
-ampsession.cookies
-outamp= ampsession.get('https://10.170.11.209/client_detail.xml?mac='+mac, headers=headers, verify=False)
-#print (outamp)
-output=outamp.content
-# print (output)
-#Next line is for testing so API call does not need to be called
-#output=b'<?xml version="1.0" encoding="utf-8" standalone="yes"?>\n<amp:amp_client_detail version="1" xmlns:amp="http://www.airwave.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.airwave.com amp_client_detail.xsd">\n  <client mac="40:83:DE:CD:0A:23">\n    <ap id="3849">ININD-IND-CD2A-AP20</ap>\n    <assoc_stat>true</assoc_stat>\n    <association id="327884940">\n      <ap id="3851">ININD-IND-CD2A-AP21</ap>\n      <bytes_used>0</bytes_used>\n      <connect_time>2018-06-12T07:54:50-04:00</connect_time>\n      <disconnect_time>2018-06-12T07:55:46-04:00</disconnect_time>\n      <radio_mode>N</radio_mode>\n      <rssi>50</rssi>\n      <ssid>AH-VOICE</ssid>\n      <vlan>156</vlan>\n    </association>\n    <association id="327884040">\n      <ap id="3850">ININD-IND-CD2A-AP02</ap>\n      <bytes_used>0</bytes_used>\n      <connect_time>2018-06-12T07:54:40-04:00</connect_time>\n      <disconnect_time>2018-06-12T07:54:50-04:00</disconnect_time>\n      <radio_mode>N</radio_mode>\n      <ssid>AH-VOICE</ssid>\n      <vlan>156</vlan>\n    </association>\n    <association id="327883814">\n      <ap id="3839">ININD-IND-CD2A-AP03</ap>\n      <bytes_used>0</bytes_used>\n      <connect_time>2018-06-12T07:54:25-04:00</connect_time>\n      <disconnect_time>2018-06-12T07:54:40-04:00</disconnect_time>\n      <radio_mode>N</radio_mode>\n      <ssid>AH-VOICE</ssid>\n      <vlan>156</vlan>\n    </association>\n    <association id="327883667">\n      <ap id="3840">ININD-IND-CD2A-AP04</ap>\n      <bytes_used>0</bytes_used>\n      <connect_time>2018-06-12T07:53:44-04:00</connect_time>\n      <disconnect_time>2018-06-12T07:54:25-04:00</disconnect_time>\n      <radio_mode>N</radio_mode>\n      <rssi>52</rssi>\n      <ssid>AH-VOICE</ssid>\n      <vlan>156</vlan>\n    </association>\n    <association id="327882890">\n      <ap id="3853">ININD-IND-CD2A-AP17</ap>\n      <bytes_used>0</bytes_used>\n      <connect_time>2018-06-12T07:53:19-04:00</connect_time>\n      <disconnect_time>2018-06-12T07:53:44-04:00</disconnect_time>\n      <radio_mode>N</radio_mode>\n      <rssi>39</rssi>\n      <ssid>AH-VOICE</ssid>\n      <vlan>156</vlan>\n    </association>\n    <auth_stat>false</auth_stat>\n    <connect_time>2018-06-12T07:55:46-04:00</connect_time>\n    <device_type>Android</device_type>\n    <login_time>2017-12-04T10:35:17-05:00</login_time>\n    <logout_time>2017-12-04T10:39:46-05:00</logout_time>\n    <radio_mode>N</radio_mode>\n    <signal>-44</signal>\n    <ssid>AH-VOICE</ssid>\n    <vendor>Zebra Technologies Inc</vendor>\n    <vlan>156</vlan>\n  </client>\n</amp:amp_client_detail>\n'
-output=output.decode("utf-8")
-# THIS IS EASIER USING JSON or another way
-apid=""
-apid1=""
-apid2=""
-apid3=""
-apid4=""
-apid5=""
-apadd=""
-apadd1=""
-apadd2=""
-apadd3=""
-apadd4=""
-apadd5=""
-ctime=""
-ctime1=""
-ctime2=""
-ctime3=""
-ctime4=""
-ctime5=""
-dtime=""
-dtime1=""
-dtime2=""
-dtime3=""
-dtime4=""
-dtime5=""
-rssi=""
-rssi1=""
-rssi2=""
-rssi3=""
-rssi4=""
-rssi5=""
-ip_add=""
-vendor=""
-
-r=0
-d=0
-c=0
-j=0
-i=0
-while (i<len(output)):
-    if (output[i]=='<'):
-       i+=1
-       if (output[i]=='a'):
-            i+=1
-            if (output[i]=='p'):
-                i+=2
-                if (output[i]=='i'):
-                    i+=4
-                    while (output[i]!='"'):         #printing the AP ID as apid, looks through the output from Airwave and parses for apid
-                        if(j==0):
-                            apid=apid+output[i]
-                        if(j==1):
-                            apid1=apid1+output[i]
-                        if (j == 2):
-                            apid2 = apid2 + output[i]
-                        if (j == 3):
-                            apid3 = apid3 + output[i]
-                        if (j == 4):
-                            apid4 = apid4 + output[i]
-                        if (j == 5):
-                            apid5 = apid5 + output[i]
-                        i+=1
-                    i+=2
-                    while (output[i]!='<'):         # setting the ap address naming convention as apadd
-                        if (j == 0):
-                            apadd = apadd + output[i]
-                        if (j == 1):
-                            apadd1 = apadd1 + output[i]
-                        if (j == 2):
-                            apadd2 = apadd2 + output[i]
-                        if (j == 3):
-                            apadd3 = apadd3 + output[i]
-                        if (j == 4):
-                            apadd4 = apadd4 + output[i]
-                        if (j == 5):
-                            apadd5 = apadd5 + output[i]
-                        i+=1
-                    j+=1
-    if (output[i]=='c'):
-        i+=1
-        if (output[i]=='o'):
-            i+=1
-            if (output[i]=='n'):
-                i+=1
-                if (output[i]=='n'):
-                    i+=1
-                    if (output[i]=='e'):
-                        i+=1
-                        while (output[i]!= '>'):
-                           i+=1
-                        if (output[i]=='>'):
-                            i+=1
-                            while (output[i] != '<'):  # Parses the data for the connect time and stores in ctime
-                                if (c == 0):
-                                    ctime = ctime + output[i]
-                                if (c == 1):
-                                    ctime1 = ctime1 + output[i]
-                                if (c == 2):
-                                    ctime2 = ctime2 + output[i]
-                                if (c == 3):
-                                    ctime3 = ctime3 + output[i]
-                                if (c == 4):
-                                    ctime4 = ctime4 + output[i]
-                                if (c == 5):
-                                    ctime5 = ctime5 + output[i]
-                                i += 1
-                            c += 1
-                            i +=5
-    if (output[i]=='d'):
-        i+=1
-        if (output[i]=='i'):
-            i+=1
-            if (output[i]=='s'):
-                i+=1
-                if (output[i]=='c'):
-                    i+=1
-                    if (output[i]=='o'):
-                        i+=1
-                        while (output[i]!= '>'):
-                           i+=1
-                        if (output[i]=='>'):
-                            i+=1
-                        while (output[i] != '<'):  # Parses the data for the disconnect time and stores in d time
-                            if (d == 0):
-                                dtime = dtime + output[i]
-                            if (d == 1):
-                                dtime1 = dtime1 + output[i]
-                            if (d == 2):
-                                dtime2 = dtime2 + output[i]
-                            if (d == 3):
-                                dtime3 = dtime3 + output[i]
-                            if (d == 4):
-                                dtime4 = dtime4 + output[i]
-                            if (d == 5):
-                                dtime5 = dtime5 + output[i]
-                            i += 1
-                        d += 1
-                        i += 5
-    if (output[i]=='i' and output[i+1]=='p' and output[i+3]=='a' and output[i+4]=='d'): # Parses the data for the IP address and stores in ip_add
-        i+=9
-        if (ip_add==""):
-
-            while(output[i]!='"'):
-                i+=1
-            if (output[i]=='"'):
-                i+=1
-                while (output[i]!='"'):
-                    ip_add= ip_add + output[i]
-                    i+=1
-    if (output[i]=='v' and output[i+1]=='e' and output[i+2]=='n' and output [i+3]=='d'): # Parses the data for the vendor and stores is as vendor
-        i+4
-        while (output[i]!='>'):
-            i+=1
-        if (output[i]=='>'):
-            i+=1
-            while (output[i]!='<'):
-                vendor = vendor + output[i]
-                i+=1
+                  while(output[i]!='"'):
+                      i+=1
+                  if (output[i]=='"'):
+                      i+=1
+                      while (output[i]!='"'):
+                          ip_add= ip_add + output[i]
+                          i+=1
+          if (output[i]=='v' and output[i+1]=='e' and output[i+2]=='n' and output [i+3]=='d'): # Parses the data for the vendor and stores is as vendor
+              i+4
+              while (output[i]!='>'):
+                  i+=1
+              if (output[i]=='>'):
+                  i+=1
+                  while (output[i]!='<'):
+                      vendor = vendor + output[i]
+                      i+=1
 
 
-    if (output[i]=='r'):
-        i+=1
-        if (output[i]=='s'):
-            i+=1
-            if (output[i]=='s'):
-                i+=1
-                if (output[i]=='i'):
-                    i+=1
-                    while (output[i]!='>'):
-                        i+1
-                    if (output[i]=='>'):
-                        i+=1
-                        while (output[i] != '<'):  # Parses the data for the RSSI and stores in rssi
-                            if (r == 0):
-                                rssi = rssi + output[i]
-                            if (r == 1):
-                                rssi1 = rssi1 + output[i]
-                            if (r == 2):
-                                rssi2 = rssi2 + output[i]
-                            if (r == 3):
-                                rssi3 = rssi3 + output[i]
-                            if (r == 4):
-                                rssi4 = rssi4 + output[i]
-                            if (r == 5):
-                                rssi5 = rssi5 + output[i]
-                            i += 1
-                        r += 1
-                        i += 5
+          if (output[i]=='r'):
+              i+=1
+              if (output[i]=='s'):
+                  i+=1
+                  if (output[i]=='s'):
+                      i+=1
+                      if (output[i]=='i'):
+                          i+=1
+                          while (output[i]!='>'):
+                              i+1
+                          if (output[i]=='>'):
+                              i+=1
+                              while (output[i] != '<'):  # Parses the data for the RSSI and stores in rssi
+                                  if (r == 0):
+                                      rssi = rssi + output[i]
+                                  if (r == 1):
+                                      rssi1 = rssi1 + output[i]
+                                  if (r == 2):
+                                      rssi2 = rssi2 + output[i]
+                                  if (r == 3):
+                                      rssi3 = rssi3 + output[i]
+                                  if (r == 4):
+                                      rssi4 = rssi4 + output[i]
+                                  if (r == 5):
+                                      rssi5 = rssi5 + output[i]
+                                  i += 1
+                              r += 1
+                              i += 5
 
-    i+=1
+          i+=1
 
-# ap_id = {'first': apid, 'second': apid1, 'third': apid2, 'fourth': apid3, 'fifth':apid4, 'sixth':apid5}
-# ap_add = {'first': apadd, 'second': apadd1, 'third': apadd2, 'fourth': apadd3, 'fifth':apadd4, 'sixth':apadd5}
+      # ap_id = {'first': apid, 'second': apid1, 'third': apid2, 'fourth': apid3, 'fifth':apid4, 'sixth':apid5}
+      # ap_add = {'first': apadd, 'second': apadd1, 'third': apadd2, 'fourth': apadd3, 'fifth':apadd4, 'sixth':apadd5}
 
-first={"AP Address":apadd, 'AP ID':apid, 'Connection Time': ctime, 'Disconnection Time':dtime, 'RSSI': rssi, 'Vendor': vendor, 'IP Address':ip_add}
-second={'AP Address':apadd1, 'AP ID':apid1, 'Connection Time': ctime1, 'Disconnection Time':dtime1, 'RSSI': rssi1}
-third={'AP Address':apadd2, 'AP ID':apid2, 'Connection Time': ctime2, 'Disconnection Time':dtime2, 'RSSI': rssi2}
-fourth={'AP Address':apadd3, 'AP ID':apid3, 'Connection Time': ctime3, 'Disconnection Time':dtime3, 'RSSI': rssi3}
-fifth={'AP Address':apadd4, 'AP ID':apid4, 'Connection Time': ctime4, 'Disconnection Time':dtime4, 'RSSI': rssi4}
-sixth={'AP Address':apadd5, 'AP ID':apid5, 'Connection Time': ctime5, 'Disconnection Time':dtime5, 'RSSI': rssi5}
+      first={"AP Address":apadd, 'AP ID':apid, 'Connection Time': ctime, 'Disconnection Time':dtime, 'RSSI': rssi, 'Vendor': vendor, 'IP Address':ip_add}
+      second={'AP Address':apadd1, 'AP ID':apid1, 'Connection Time': ctime1, 'Disconnection Time':dtime1, 'RSSI': rssi1}
+      third={'AP Address':apadd2, 'AP ID':apid2, 'Connection Time': ctime2, 'Disconnection Time':dtime2, 'RSSI': rssi2}
+      fourth={'AP Address':apadd3, 'AP ID':apid3, 'Connection Time': ctime3, 'Disconnection Time':dtime3, 'RSSI': rssi3}
+      fifth={'AP Address':apadd4, 'AP ID':apid4, 'Connection Time': ctime4, 'Disconnection Time':dtime4, 'RSSI': rssi4}
+      sixth={'AP Address':apadd5, 'AP ID':apid5, 'Connection Time': ctime5, 'Disconnection Time':dtime5, 'RSSI': rssi5}
 
-print (first["AP Address"])
-print (first["AP ID"])
-print (first['Connection Time'])
-print (first['Disconnection Time'])
-print (first['RSSI'])
-print (first['Vendor'])
-print (first['IP Address'])
+      print (first["AP Address"])
+      print (first["AP ID"])
+      print (first['Connection Time'])
+      print (first['Disconnection Time'])
+      print (first['RSSI'])
+      print (first['Vendor'])
+      print (first['IP Address'])
 
-########################################################################################################################
-# File to be ran after the API call that gives the AP address or a file to be used when AP addres is known
-########################################################################################################################
+      ########################################################################################################################
+      # File to be ran after the API call that gives the AP address or a file to be used when AP addres is known
+      ########################################################################################################################
 
-########################################################################################################################
-# Add new AP to file easily by adding to the name dictionary.
-# Format the AP as 'XXXX-XXXX' Remove all numbers at the end so that the last character is non-numerical
-########################################################################################################################
+      ########################################################################################################################
+      # Add new AP to file easily by adding to the name dictionary.
+      # Format the AP as 'XXXX-XXXX' Remove all numbers at the end so that the last character is non-numerical
+      ########################################################################################################################
 
-place=""
-inputs=apadd
-                        # Checks to see if the device is in airwave
-max=len(inputs)
-if max==0:
-    print "Not in AirWave"
+      place=""
+      inputs=apadd
+                              # Checks to see if the device is in airwave
+      max=len(inputs)
+      if max==0:
+          print "Not in AirWave"
 
-else:
-    max-=1
-    i=0
-    while inputs[max]=='0' or inputs[max]=='1' or inputs[max]=='2' or inputs[max]=='3' or inputs[max]=='4' or inputs[max]=='5' or inputs[max]=='6' or inputs[max]=='7' or inputs[max]=='8' or inputs[max]=='9':
-        max-=1
+      else:
+          max-=1
+          i=0
+          while inputs[max]=='0' or inputs[max]=='1' or inputs[max]=='2' or inputs[max]=='3' or inputs[max]=='4' or inputs[max]=='5' or inputs[max]=='6' or inputs[max]=='7' or inputs[max]=='8' or inputs[max]=='9':
+              max-=1
 
-                        # Checks the dictionary and brings up the screenshot file.
-    while i!=max+1:
-        place=place+(inputs[i])
-        i+=1
-    pic=name[place]
-    pic=pic+".png"
-    print (pic)
+                              # Checks the dictionary and brings up the screenshot file.
+          while i!=max+1:
+              place=place+(inputs[i])
+              i+=1
+          pic=name[place]
+          pic=pic+".png"
+          print (pic)
