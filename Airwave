@@ -8,7 +8,7 @@ import requests
 # Add new AP to file easily by adding to the name dictionary.
 # Format the AP as 'XXXX-XXXX' Remove all numbers at the end so that the last character is non-numerical
 ########################################################################################################################
-      def AirWave(mac):
+def AirWave(mac):
       #TEST
 
       # 48:45:20:93:C9:98
