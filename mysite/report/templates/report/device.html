@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Ascension Information Services - Device Location Service </title>
+    <title>Ascension Information Services - Device Location Service</title>
 
     {% load staticfiles %}
     {% load static %}
@@ -311,19 +311,11 @@
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-lg-12">
-                        <h1> Search by Asset Tag</h1>
+                        <h1> Device Search</h1>
                             <form action="/report/" method="post">
                                 {% csrf_token %}
-                                {{ device_form }}
-                                <input type="submit" value="Search by Asset Tag" />
-                            </form>
-
-                            <h1> Search by IP Address</h1>
-
-                            <form action="/report/" method="post">
-                                {% csrf_token %}
-                                {{ ip_form }}
-                                <input type="submit" value="Search by IP Address" />
+                                {{ search_select }}
+                                <input type="submit" value="Search for Device" />
                             </form>
                     </div>
                     <!-- /.col-lg-12 -->

@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>SB Admin 2 - Bootstrap Admin Theme</title>
+    <title>Ascension Information Services - Device Location Service</title>
 
     {% load static %}
 
@@ -30,6 +30,8 @@
 
     <!-- Custom Fonts -->
     <link href="{% static 'report/css/font-awesome.min.css' %}" rel="stylesheet" type="text/css">
+
+    <link href="{% static 'report/css/modal.css' %}" rel="stylesheet">
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -53,7 +55,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="index.html">SB Admin v2.0</a>
+
             </div>
             <!-- /.navbar-header -->
 
@@ -267,39 +269,6 @@
             </ul>
             <!-- /.navbar-top-links -->
 
-            <div class="navbar-default sidebar" role="navigation">
-                <div class="sidebar-nav navbar-collapse">
-                    <ul class="nav" id="side-menu">
-
-                        <li>
-                            <a> Previous Devices</a>
-                        </li>
-                        <li>
-                            <a> BA318144 </a>
-
-                        </li>
-                        <li>
-                            <a> 127.0.0.1 </a>
-                        </li>
-                        <li>
-
-                        </li>
-                        <li>
-
-                        </li>
-                        <li>
-
-                        </li>
-                        <li>
-
-                        </li>
-                    </ul>
-                </div>
-                <!-- /.sidebar-collapse -->
-            </div>
-            <!-- /.navbar-static-side -->
-        </nav>
-
         <div id="page-wrapper">
             <div class="row">
                 <div class="col-lg-12">
@@ -312,24 +281,24 @@
                 <div class="col-lg-8">
                     <div class="panel panel-default">
                         <div class="panel-heading">
-                            Access Point Map
-                        </div>
-                        <!-- /.panel-heading -->
-                        <div class="panel-body">
-                            <div id="access point map">
-                                <img src="{% static 'report/images/AND-1_AP.PNG' %}" alt="Access Point Map" width="845" height="444">
-                            </div>
-                        </div>
-                        <!-- /.panel-body -->
-                    </div>
-                    <!-- /.panel -->
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
                             Building Floor Plan
                         </div>
                         <!-- /.panel-heading -->
                         <div class="panel-body">
-                            <img src="{% static 'report/images/AND-1_FP.PNG' %}" alt="Building Floor Plan" width="845" height="444">
+                            <img id="APImg" src="{% static 'report/images/AND-1_FP.PNG' %}" alt="Building Floor Plan" width="845" height="444">
+
+                            <!-- The Modal -->
+                                    <div id="APModal" class="modal">
+
+                                      <!-- The Close Button -->
+                                      <span class="close">&times;</span>
+
+                                      <!-- Modal Content (The Image) -->
+                                      <img class="modal-content" id="img01">
+
+                                      <!-- Modal Caption (Image Text) -->
+                                      <div id="caption"></div>
+                                    </div>
                         </div>
                         <!-- /.panel-body -->
                     </div>
@@ -415,11 +384,23 @@
                                     <tbody>
                                         <tr>
                                             <td>Wired Switch: </td>
-                                            <td>{{ device.access_point }}</td>
+                                            <td>{{ device.switch }}</td>
                                         </tr>
                                         <tr>
-                                            <td>Connection Time: </td>
-                                            <td>{{ device.connection_time }}</td>
+                                            <td>Switch Location: </td>
+                                            <td>{{ device.switch_location }}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Port: </td>
+                                            <td>{{ device.switch_port }}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Last Seen: </td>
+                                            <td>{{ device.last_seen }}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>First Discovered: </td>
+                                            <td>{{ device.first_discovered }}</td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -481,6 +462,9 @@
     <script src="{% static 'report/js/raphael.min.js' %}"></script>
     <script src="{% static 'report/js/morris.min.js' %}"></script>
     <script src="{% static 'report/js/morris-data.js' %}"></script>
+
+    <!-- Modal Image Javascript -->
+    <script src="{% static 'report/js/modal.js' %}"></script>
 
     <!-- Custom Theme JavaScript -->
     <script src="{% static 'report/js/sb-admin-2.js' %}"></script>

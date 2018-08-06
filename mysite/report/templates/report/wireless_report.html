@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>SB Admin 2 - Bootstrap Admin Theme</title>
+    <title>Ascension Information Services - Device Location Service</title>
 
     {% load static %}
 
@@ -30,6 +30,9 @@
 
     <!-- Custom Fonts -->
     <link href="{% static 'report/css/font-awesome.min.css' %}" rel="stylesheet" type="text/css">
+
+    <link href="{% static 'report/css/modal.css' %}" rel="stylesheet">
+
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -53,7 +56,6 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="index.html">SB Admin v2.0</a>
             </div>
             <!-- /.navbar-header -->
 
@@ -267,39 +269,6 @@
             </ul>
             <!-- /.navbar-top-links -->
 
-            <div class="navbar-default sidebar" role="navigation">
-                <div class="sidebar-nav navbar-collapse">
-                    <ul class="nav" id="side-menu">
-
-                        <li>
-                            <a> Previous Devices</a>
-                        </li>
-                        <li>
-                            <a> BA318144 </a>
-
-                        </li>
-                        <li>
-                            <a> 127.0.0.1 </a>
-                        </li>
-                        <li>
-
-                        </li>
-                        <li>
-
-                        </li>
-                        <li>
-
-                        </li>
-                        <li>
-
-                        </li>
-                    </ul>
-                </div>
-                <!-- /.sidebar-collapse -->
-            </div>
-            <!-- /.navbar-static-side -->
-        </nav>
-
         <div id="page-wrapper">
             <div class="row">
                 <div class="col-lg-12">
@@ -317,7 +286,21 @@
                         <!-- /.panel-heading -->
                         <div class="panel-body">
                             <div id="access point map">
-                                <img src="{% static 'report/images/AND-1_AP.PNG' %}" alt="Access Point Map" width="845" height="444">
+                                <!-- Trigger the Modal -->
+                                    <img id="APImg" src="{% static 'report/images/AND-1_AP.PNG' %}" alt="Access Point Map" style="width:100%;max-width:600px">
+
+                                    <!-- The Modal -->
+                                    <div id="APModal" class="modal">
+
+                                      <!-- The Close Button -->
+                                      <span class="close">&times;</span>
+
+                                      <!-- Modal Content (The Image) -->
+                                      <img class="modal-content" id="img01">
+
+                                      <!-- Modal Caption (Image Text) -->
+                                      <div id="caption"></div>
+                                    </div>
                             </div>
                         </div>
                         <!-- /.panel-body -->
@@ -329,7 +312,21 @@
                         </div>
                         <!-- /.panel-heading -->
                         <div class="panel-body">
-                            <img src="{% static 'report/images/AND-1_FP.PNG' %}" alt="Building Floor Plan" width="845" height="444">
+                            <!-- Trigger the Modal -->
+                            <img id="FPImg" src="{% static 'report/images/AND-1_FP.PNG' %}" alt="Building Floor Plan" style="width:100%;max-width:600px">
+
+                            <!-- The Modal -->
+                                    <div id="FPModal" class="modal">
+
+                                      <!-- The Close Button -->
+                                      <span class="second_close">&times;</span>
+
+                                      <!-- Modal Content (The Image) -->
+                                      <img class="modal-content" id="img02">
+
+                                      <!-- Modal Caption (Image Text) -->
+                                      <div id="second_caption"></div>
+                                    </div>
                         </div>
                         <!-- /.panel-body -->
                     </div>
@@ -427,7 +424,26 @@
                                         </tr>
                                         <tr>
                                             <td>Last 5 Access Points: </td>
-                                            <td>{{ device.last_five_access_points }}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>(Most Recent) </td>
+                                            <td>{{ device.second_ap }}</td>
+                                        </tr>
+                                        <tr>
+                                            <td> </td>
+                                            <td>{{ device.third_ap }}</td>
+                                        </tr>
+                                        <tr>
+                                            <td> </td>
+                                            <td>{{ device.fourth_ap }}</td>
+                                        </tr>
+                                        <tr>
+                                            <td> </td>
+                                            <td>{{ device.fifth_ap }}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>(Oldest)</td>
+                                            <td>{{ device.sixth_ap }}</td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -489,6 +505,9 @@
     <script src="{% static 'report/js/raphael.min.js' %}"></script>
     <script src="{% static 'report/js/morris.min.js' %}"></script>
     <script src="{% static 'report/js/morris-data.js' %}"></script>
+
+    <!-- Modal Image Javascript -->
+    <script src="{% static 'report/js/modal.js' %}"></script>
 
     <!-- Custom Theme JavaScript -->
     <script src="{% static 'report/js/sb-admin-2.js' %}"></script>
