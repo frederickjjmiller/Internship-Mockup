@@ -4,7 +4,7 @@ from django.core.exceptions import ObjectDoesNotExist
 
 from .forms import SearchSelection
 
-from .models import Device
+from .models import NetDevice
 
 
 def get_device(request):
@@ -42,7 +42,7 @@ def get_device(request):
 def device_report(request, device):
     # request the device from the database
     try:
-        requested_device = Device.objects.get(asset_tag=device)
+        requested_device = NetDevice.objects.get(asset_tag=device)
         if requested_device.is_wireless:
             template = loader.get_template('report/wireless_report.html')
             context = {'device': requested_device}
@@ -59,7 +59,7 @@ def device_report(request, device):
 def ip_report(request, address):
     # request the device from the database
     try:
-        requested_device = Device.objects.get(ip_address=address)
+        requested_device = NetDevice.objects.get(ip_address=address)
         if requested_device.is_wireless:
             template = loader.get_template('report/wireless_report.html')
             context = {'device': requested_device}
@@ -76,7 +76,7 @@ def ip_report(request, address):
 def serial_report(request, serial):
     # request the device from the database
     try:
-        requested_device = Device.objects.get(serial_number=serial)
+        requested_device = NetDevice.objects.get(serial_number=serial)
         if requested_device.is_wireless:
             template = loader.get_template('report/wireless_report.html')
             context = {'device': requested_device}

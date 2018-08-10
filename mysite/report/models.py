@@ -3,7 +3,7 @@ from django.db import models
 # Create your models here.
 
 
-class Device(models.Model):
+class NetDevice(models.Model):
 
     # These are the various fields that are filled by the API calls
     # Device Information Fields
@@ -45,6 +45,14 @@ class Device(models.Model):
 
     def __str__(self):
         return self.asset_tag
+
+    @classmethod
+    def create(cls, mac):
+        net_device = cls(mac_address=mac)
+
+        return net_device
+
+
 
 
 
