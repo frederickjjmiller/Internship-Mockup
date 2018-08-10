@@ -241,7 +241,7 @@ name={'ININD-WIP-WM0A-AP1-':"Williamsport_Hospital_0",
 
     # API CALL TO AIRWAVE
 def AirWave(mac):
-    data='credential_0=stvuser&credential_1=K33pitEZ@&destination=/&login=Log In'
+    data='credential_0='USERNAME'&credential_1='PASSWORD'@&destination=/&login=Log In'
     headers={'Content-Type':'application/x-www-form-urlencoded','Cache-Control':'no-cache'}
     ampsession = requests.Session()
     loginamp = ampsession.post('https://10.170.11.209/LOGIN', headers=headers, data=data, verify=False)
