@@ -1,0 +1,6 @@
+For the demo, which runs on SQLlite:
+
+Username: dev
+Password: helloworld
+
+This is only for demo purposes only, please don't try to do anything with this branch. See the live_data branch for the most up-to-date code. 
