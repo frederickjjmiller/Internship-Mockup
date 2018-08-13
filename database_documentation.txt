@@ -1,0 +1,153 @@
+Setting up PostgreSQL with Python 3 and Using it with Django
+
+Intro
+
+Django is a versatile framework for creating Python-based applications. These applications are designed to use SQLite databases by default, but for applications that need heavier lifting, using PstgreSQL as your database is a much better option. This guide will demonstrate how to install and configure PostgreSQL and integrate it with your Django application.
+
+What You'll need
+
+These are the tools that are necessary to have prior to integrating PostgreSQL with Django:
+
+- Ubuntu 18.04
+
+- Clean ubuntu server instance with a non-root user setup
+
+- Django installed
+
+- Virtual environment set up from Django installation
+
+Install Prerequisites
+
+We will need to install the following in order to properly and easily integrate PostgreSQL with Django: pip, the database software, and the associated libraries that go along with it.
+
+Open the terminal, and enter the following apt commands to get your packages:
+
+sudo apt-get update
+
+sudo apt-get install python-pip python-dev libpq-dev postgresql postgresql-contrib
+
+Create a Database and Database User
+
+First, we need to change the postgres administrative user to perform administrative tasks. Enter this in the command line:
+
+sudo su - postgres
+
+Now you are in a shell session for postgres. Use postgres in this by typing:
+
+psql
+
+Now we can actually create a database for your project. Here, we will call the database 'dummyproject' for the guide, but you should name it something pertaining to your actual project. Type this in the postgres instance:
+
+CREATE DATABASE dummyproject;
+
+Remember to end any SQLprompt with a semicolon.
+
+Now you need to make a database user to we can connect to it and use it.
+
+CREATE USER dummyprojectuser WITH PASSWORD 'password';
+
+Now you need to modify a few of the connection parameters to sufficiently use the database:
+
+ALTER ROLE dummyprojectuser SET client_encoding TO 'utf8';
+
+ALTER ROLE dummyprojectuser SET default_transaction_isolation TO 'read committed';
+
+ALTER ROLE dummyprojectuser SET timezone TO 'UTC';
+
+Now you just need to grant rights:
+
+GRANT ALL PRIVILEGES ON DATABASE dummyproject TO dummyprojectuser;
+
+now exit out of postgres to get back to the terminal:
+
+\q
+
+exit
+
+Install Psycopg2
+
+If you have a Django project already, it is assumed that you have set up a virtual environment for Django. Find that virtual environment, and within it in the terminal, install psycopg2:
+
+pip install django psycopg2
+
+Now we can start the database usage.
+
+Configure the Django Database Settings
+
+Open the main Django project settings file located within the project directory.
+
+Towards the bottom is a DATABASES section that looks like this:
+
+. . .
+
+DATABASES = {
+
+'default': {
+
+'ENGINE': 'django.db.backends.sqlite3',
+
+'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+
+}
+
+}
+
+. . .
+
+Like all Django projects, this one has defaulted to SQLite as its database. Obviously, you're here to change that.
+
+First thing to do is change the engine to postgresql_psycopg2 instead of sqlite3. Then the name is the name of your project, and you'll need to add the credintials for your database user. Here's what it will look like:
+
+. . .
+
+DATABASES = {
+
+'default': {
+
+'ENGINE': 'django.db.backends.postgresql_psycopg2',
+
+'NAME': 'dummyproject',
+
+'USER': 'dummyprojectuser',
+
+'PASSWORD': 'password',
+
+'HOST': 'localhost',
+
+'PORT': '',
+
+}
+
+}
+
+. . .
+
+Save the file and close it.
+
+Migrate the Database and Test your Project
+
+Now everything is correct, we can apply migrations to our database:
+
+cd ~/dummyproject
+
+python manage.py makemigrations
+
+python manage.py migrate
+
+now we need an administrative account:
+
+python manage.py createsuperuser
+
+You'll be asked to enter a username, password, and an email address. Once your admin account is set up, test the database by starting up the Django server:
+
+python manage.py runserver 0.0.0.0:8000
+
+in your web browser enter your IP address, and follow it by :8000 to reach the Django default page:
+
+http://<yourIP>:8000
+
+You should see the default index page, and you can visit the database via the admin account by appending /admin to the end of your url.
+
+Once you're finished investigating, you can stop the development server by hitting CTRL-C in your terminal window.
+
+Congratulations, you have now successfully set up a PostgreSQL database to properly work with your Django project
