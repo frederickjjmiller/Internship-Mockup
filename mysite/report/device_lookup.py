@@ -26,7 +26,7 @@ def servicenow_lookup(search, parameter):
                 line_count += 1
             else:
                 # check if the search term matches
-                # if row[] == search:
+                # if row[i] == search:
                     # Check if the network device is in the database
                     # try:
                         # query = NetDevice.objects.get(mac_address=mac)
