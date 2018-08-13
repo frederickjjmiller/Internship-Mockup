@@ -5,6 +5,7 @@ from django.core.exceptions import ObjectDoesNotExist
 from .forms import SearchSelection
 
 from .models import NetDevice
+from .device_lookup import device_lookup
 
 
 def get_device(request):
@@ -18,16 +19,19 @@ def get_device(request):
             search_term = search_select.cleaned_data['search_term']
             if search_param == "AT":
                 # Check if device is in database, if does not exist, check SN, ND, & Airwave
+                # device_lookup(search_term, search_param)
                 # redirect to a new URL:
                 url = "/report/device/" + search_term
                 return HttpResponseRedirect(url)
             elif search_param == "IP":
                 # Check if device is in database, if does not exist, check SN, ND, & Airwave
+                # device_lookup(search_term, search_param)
                 # redirect to a new URL:
                 url = "/report/address/" + search_term
                 return HttpResponseRedirect(url)
             elif search_param == "SN":
                 # Check if device is in database, if does not exist, check SN, ND, & Airwave
+                # device_lookup(search_term, search_param)
                 # redirect to a new URL:
                 url = "/report/serial/" + search_term
                 return HttpResponseRedirect(url)

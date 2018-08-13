@@ -8,7 +8,8 @@ from django.core.exceptions import ObjectDoesNotExist
 from .models import NetDevice
 
 import csv
-from .netdisco_models import Device, DevicePort
+from .netdisco_models import Device, Node
+from .Airwave import AirWave
 
 def servicenow_lookup(search, parameter):
 
@@ -25,17 +26,17 @@ def servicenow_lookup(search, parameter):
                 line_count += 1
             else:
                 # check if the search term matches
-                if row[] == search:
+                # if row[] == search:
                     # Check if the network device is in the database
-                    try:
+                    # try:
                         # query = NetDevice.objects.get(mac_address=mac)
                         # Store the contents in the database
-                    except ObjectDoesNotExist:
+                    # except ObjectDoesNotExist:
                         # Create a new object in the database
                         # query = NetDevice.create(mac)
                         # Store the contents in the database
                         # Then return the mac address so we can lookup with other services
-                        return mac
+                        # return mac
     # IF we get to this, this means there was an error looking up the device
     return 1
 
@@ -44,19 +45,24 @@ def netdisco_lookup(mac):
 
     # Search the NetDisco Database for device information on the given mac address and store relevant information in
     # the default database
-    try:
-        query = DevicePort.objects.get(mac=mac)
+    # try:
+        # query = Node.objects.get(mac=mac)
         # Pull relevant data from netdisco database and store in appdata db
-    except ObjectDoesNotExist:
+        # Node object has all information about device,
+        # and Device object has all information on the switch/access point.
+        # see models.py and netdisco_models.py for relevant database fields.
+        #
+    # except ObjectDoesNotExist:
         # Some exception since it's not in netdisco for some reason.
 
 
-def device_lookup(search):
+def device_lookup(search, paramiter):
 
     # The primary function. Combines all lookups and API calls to discover a device.
 
-    mac = servicenow_lookup(search)
+    mac = servicenow_lookup(search, paramiter)
     netdisco_lookup(mac)
     # The Airwave API call goes here
+    # response = AirWave(mac)
     # If Airwave returns error, device is wired.
-    # Otherwise we should flag as wireless.
+    # Otherwise we should flag as wireless, and store the data in the database
