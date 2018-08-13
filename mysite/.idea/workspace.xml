@@ -1,25 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="0642c28d-886e-4efb-8a16-55e6ffc9abf0" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/report/device_lookup.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/report/netdisco_models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../README.md" beforeDir="false" afterPath="$PROJECT_DIR$/../README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mysite/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/mysite/settings.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/report/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/report/admin.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/report/airwave_api.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/report/migrations/0001_initial.py" beforeDir="false" afterPath="$PROJECT_DIR$/report/migrations/0001_initial.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/report/migrations/0002_auto_20180615_1825.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/report/migrations/0003_auto_20180618_1922.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/report/migrations/0004_device_last_login_date.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/report/migrations/0005_auto_20180622_1846.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/report/migrations/0006_device_is_wireless.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/report/migrations/0007_auto_20180716_1326.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/report/migrations/0008_device_serial_number.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/report/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/report/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/report/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/report/views.py" afterDir="false" />
-    </list>
+    <list default="true" id="0642c28d-886e-4efb-8a16-55e6ffc9abf0" name="Default" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -30,7 +12,7 @@
     <session id="960426648">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="6" />
+          <entry key="project.closed" value="7" />
           <entry key="project.open.time.30" value="1" />
           <entry key="project.open.time.32" value="1" />
           <entry key="project.open.time.33" value="2" />
@@ -79,11 +61,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/mysite/settings.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1320">
-              <caret line="90" column="20" selection-start-line="90" selection-start-column="20" selection-end-line="90" selection-end-column="20" />
-              <folding>
-                <element signature="e#307#316#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="1530">
+              <caret line="104" column="6" selection-start-line="104" selection-start-column="6" selection-end-line="104" selection-end-column="6" />
             </state>
           </provider>
         </entry>
@@ -91,8 +70,11 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/report/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="30">
-              <caret line="2" column="1" selection-start-line="2" selection-end-line="2" selection-end-column="53" />
+            <state relative-caret-position="450">
+              <caret line="33" selection-start-line="33" selection-end-line="33" />
+              <folding>
+                <element signature="e#0#58#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -100,26 +82,19 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/report/models.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="648">
-              <caret line="54" selection-start-line="54" selection-end-line="54" />
-              <folding>
-                <marker date="1533915052168" expanded="true" signature="2369:2373" ph="..." />
-              </folding>
+            <state relative-caret-position="870">
+              <caret line="58" selection-start-line="58" selection-end-line="58" />
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/report/device_lookup.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="768">
-              <caret line="61" column="43" lean-forward="true" selection-start-line="61" selection-start-column="43" selection-end-line="61" selection-end-column="43" />
+            <state relative-caret-position="515">
+              <caret line="38" column="32" lean-forward="true" selection-start-line="38" selection-start-column="32" selection-end-line="38" selection-end-column="32" />
               <folding>
                 <element signature="e#184#237#0" expanded="true" />
-                <marker date="1533915052196" expanded="true" signature="371:377" ph="..." />
-                <marker date="1533915052196" expanded="true" signature="1706:1712" ph="..." />
-                <marker date="1533915052196" expanded="true" signature="2113:2114" ph="..." />
-                <marker date="1533915052196" expanded="true" signature="2113:2119" ph="..." />
               </folding>
             </state>
           </provider>
@@ -128,8 +103,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/report/admin.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="90">
-              <caret line="6" column="30" selection-start-line="6" selection-start-column="30" selection-end-line="6" selection-end-column="30" />
+            <state relative-caret-position="60">
+              <caret line="6" column="33" selection-start-line="6" selection-start-column="33" selection-end-line="6" selection-end-column="33" />
               <folding>
                 <element signature="e#0#32#0" expanded="true" />
               </folding>
@@ -137,10 +112,12 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/report/netdisco_models.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-591" />
+            <state relative-caret-position="570">
+              <caret line="38" column="23" selection-start-line="38" selection-start-column="23" selection-end-line="38" selection-end-column="23" />
+            </state>
           </provider>
         </entry>
       </file>
@@ -392,11 +369,8 @@
     <entry file="file://$PROJECT_DIR$/report/nd_modles.py" />
     <entry file="file://$PROJECT_DIR$/mysite/settings.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1320">
-          <caret line="90" column="20" selection-start-line="90" selection-start-column="20" selection-end-line="90" selection-end-column="20" />
-          <folding>
-            <element signature="e#307#316#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="1530">
+          <caret line="104" column="6" selection-start-line="104" selection-start-column="6" selection-end-line="104" selection-end-column="6" />
         </state>
       </provider>
     </entry>
@@ -409,18 +383,15 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/report/models.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="648">
-          <caret line="54" selection-start-line="54" selection-end-line="54" />
-          <folding>
-            <marker date="1533915052168" expanded="true" signature="2369:2373" ph="..." />
-          </folding>
+        <state relative-caret-position="870">
+          <caret line="58" selection-start-line="58" selection-end-line="58" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/report/admin.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="90">
-          <caret line="6" column="30" selection-start-line="6" selection-start-column="30" selection-end-line="6" selection-end-column="30" />
+        <state relative-caret-position="60">
+          <caret line="6" column="33" selection-start-line="6" selection-start-column="33" selection-end-line="6" selection-end-column="33" />
           <folding>
             <element signature="e#0#32#0" expanded="true" />
           </folding>
@@ -429,31 +400,30 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/report/views.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="30">
-          <caret line="2" column="1" selection-start-line="2" selection-end-line="2" selection-end-column="53" />
+        <state relative-caret-position="450">
+          <caret line="33" selection-start-line="33" selection-end-line="33" />
+          <folding>
+            <element signature="e#0#58#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/report/device_lookup.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="768">
-          <caret line="61" column="43" lean-forward="true" selection-start-line="61" selection-start-column="43" selection-end-line="61" selection-end-column="43" />
+        <state relative-caret-position="515">
+          <caret line="38" column="32" lean-forward="true" selection-start-line="38" selection-start-column="32" selection-end-line="38" selection-end-column="32" />
           <folding>
             <element signature="e#184#237#0" expanded="true" />
-            <marker date="1533915052196" expanded="true" signature="371:377" ph="..." />
-            <marker date="1533915052196" expanded="true" signature="1706:1712" ph="..." />
-            <marker date="1533915052196" expanded="true" signature="2113:2114" ph="..." />
-            <marker date="1533915052196" expanded="true" signature="2113:2119" ph="..." />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/report/airwave_api.py">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
+    <entry file="file://$PROJECT_DIR$/report/airwave_api.py" />
     <entry file="file://$PROJECT_DIR$/report/netdisco_models.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-591" />
+        <state relative-caret-position="570">
+          <caret line="38" column="23" selection-start-line="38" selection-start-column="23" selection-end-line="38" selection-end-column="23" />
+        </state>
       </provider>
     </entry>
   </component>
