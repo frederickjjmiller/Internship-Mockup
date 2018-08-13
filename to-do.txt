@@ -1,0 +1,17 @@
+List of To-Do items for project:
+
+- implement a function that displays the correct floorplan image(s) for the access point/switch the device is on.
+
+- Extend the above function to display all relevant floorplans for that buildingin a modal slideshow (if possible)
+
+- Implement .csv reader with formatted information.
+
+- Implement actual database calls. 
+
+- 
+
+KNOWN ISSUES
+
+- On the wireless_report page, the close button for the 2nd modal image appears microscopically small on the upper left hand side of the page, as oppsed to normal size in the upper right hand side of the page. 
+
+

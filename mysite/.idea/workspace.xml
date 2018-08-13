@@ -1,10 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="0642c28d-886e-4efb-8a16-55e6ffc9abf0" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/report/device_lookup.py" beforeDir="false" afterPath="$PROJECT_DIR$/report/device_lookup.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/report/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/report/views.py" afterDir="false" />
-    </list>
+    <list default="true" id="0642c28d-886e-4efb-8a16-55e6ffc9abf0" name="Default" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
